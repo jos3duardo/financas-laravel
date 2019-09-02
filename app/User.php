@@ -19,13 +19,7 @@ class User extends Authenticatable
         'name', 'email', 'password',
     ];
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function categories()
-    {
-        return $this->belongsTo('App\Category');
-    }
+
     /**
      * The attributes that should be hidden for arrays.
      *

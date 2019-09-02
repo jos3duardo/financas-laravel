@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
+use App\Despesas;
 use Illuminate\Http\Request;
 
 class DespesasController extends Controller
@@ -13,7 +15,12 @@ class DespesasController extends Controller
      */
     public function index()
     {
-        //
+        $user = auth()->user();
+        $despesas = Despesas::where([
+            'user_id' => $user->id
+        ])->get();
+        return view('Despesas.index', compact('despesas'));
+
     }
 
     /**
@@ -23,7 +30,12 @@ class DespesasController extends Controller
      */
     public function create()
     {
-        //
+        $user = auth()->user();
+        $categories = Category::where([
+            'user_id' => $user->id
+        ])->get();
+
+        return view('Despesas.create', compact('categories'));
     }
 
     /**
@@ -34,7 +46,14 @@ class DespesasController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $user = auth()->user();
+        $data['user_id'] = $user->id;
+        $data['data_lancamento'] = $this->dateParse($data['data_lancamento']);
+        if (Despesas::create($data) ){
+            return redirect(route('despesa-index'))->with('success', 'Despesa Criada');
+        }
+        return redirect(route('despesa-index'))->with('error', 'Não foi possivel criar a despesa');
     }
 
     /**

@@ -39,4 +39,10 @@ Route::prefix('receitas')->group(function () {
 });
 Route::prefix('despesas')->group(function () {
     Route::get('/', 'DespesasController@index')->name('despesa-index');
+    Route::get('/create', 'DespesasController@create')->name('despesa-create');
+    Route::post('/store', 'DespesasController@store')->name('despesa-store');
+    Route::get('/{id}/edit', 'DespesasController@edit')->name('despesa-edit');
+    Route::post('/{id}/update', 'DespesasController@update')->name('despesa-update');
+    Route::get('/{id}/show', 'DespesasController@show')->name('despesa-show');
+    Route::get('/{id}/delete', 'DespesasController@destroy')->name('despesa-delete');
 });
