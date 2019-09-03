@@ -58,7 +58,11 @@ class ReceitasController extends Controller
      */
     public function show($id)
     {
-        $receita = Receitas::findOrFail($id);
+        $user = auth()->user();
+        $receita = Receitas::where([
+            'id' => $id,
+            'user_id' => $user->id
+        ])->first();
 
         return view('Receitas.show', compact('receita'));
     }
@@ -71,7 +75,11 @@ class ReceitasController extends Controller
      */
     public function edit($id)
     {
-        $receita = Receitas::findOrFail($id);
+        $user = auth()->user();
+        $receita = Receitas::where([
+            'id' => $id,
+            'user_id' => $user->id
+        ])->first();
         return view('Receitas.edit', compact('receita'));
     }
 
@@ -84,7 +92,11 @@ class ReceitasController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $receita = Receitas::findOrFail($id);
+        $user = auth()->user();
+        $receita = Receitas::where([
+            'id' => $id,
+            'user_id' => $user->id
+        ])->first();
         $data = $request->all();
         $user = auth()->user();
 
@@ -106,9 +118,13 @@ class ReceitasController extends Controller
      */
     public function destroy($id)
     {
-        $receita = Receitas::findOrFail($id);
+        $user = auth()->user();
+        $receita = Receitas::where([
+            'id' => $id,
+            'user_id' => $user->id
+        ])->first();
         if ($receita->delete()){
-            return redirect(route('receita-index'))->with('status', 'Receita deletada');
+            return redirect(route('receita-index'))->with('error', 'Receita deletada');
         }
         return redirect(route('receita-index'))->with('error', 'Não foi possivel deletar a receita');
     }

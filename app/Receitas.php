@@ -16,4 +16,9 @@ class Receitas extends Model
        'name',
        'user_id'
     ];
+    public function categoria()
+    {
+        return $this->belongsTo('App\Category');
+
+    }
 }

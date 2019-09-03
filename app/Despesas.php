@@ -23,8 +23,7 @@ class Despesas extends Model
      */
     public function categoria()
     {
-//        return $this->belongsTo('App\Category');
-        return $this->belongsTo(Category::class);
+        return $this->belongsTo('App\Category','category_id');
 
     }
 }

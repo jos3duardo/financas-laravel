@@ -64,7 +64,13 @@ class DespesasController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = auth()->user();
+        $despesa = Despesas::where([
+            'id' => $id,
+            'user_id' => $user->id
+        ])->first();
+
+        return view('Despesas.show', compact('despesa'));
     }
 
     /**
@@ -75,7 +81,12 @@ class DespesasController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = auth()->user();
+        $categories = Category::where([
+            'user_id' => $user->id
+        ])->get();
+        $despesa = Despesas::findOrFail($id);
+        return view('Despesas.edit', compact('despesa','categories'));
     }
 
     /**
@@ -87,7 +98,23 @@ class DespesasController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = auth()->user();
+        $despesa = Despesas::where([
+            'id' => $id,
+            'user_id' => $user->id
+        ])->first();
+        $data = $request->all();
+        $user = auth()->user();
+
+        $despesa->user_id = $user->id;
+        $despesa->name = $data['name'];
+        $despesa->valor = $data['valor'];
+        $despesa->category_id = $data['category_id'];
+        $despesa->data_lancamento = $this->dateParse($data['data_lancamento']);
+        if ($despesa->save() ){
+            return redirect(route('despesa-index'))->with('success', 'Despesa editada');
+        }
+        return redirect(route('despesa-index'))->with('error', 'Não foi possivel editar a despesa');
     }
 
     /**
@@ -98,6 +125,14 @@ class DespesasController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = auth()->user();
+        $despesa = Despesas::where([
+            'id' => $id,
+            'user_id' => $user->id
+        ])->first();
+        if ($despesa->delete()){
+            return redirect(route('despesa-index'))->with('error', 'Despesa deletada');
+        }
+        return redirect(route('despesa-index'))->with('error', 'Não foi possivel deletar a despesa');
     }
 }

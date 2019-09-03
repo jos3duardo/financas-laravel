@@ -46,3 +46,7 @@ Route::prefix('despesas')->group(function () {
     Route::get('/{id}/show', 'DespesasController@show')->name('despesa-show');
     Route::get('/{id}/delete', 'DespesasController@destroy')->name('despesa-delete');
 });
+Route::prefix('extrato')->group(function () {
+    Route::get('/', 'ExtratoController@index')->name('extrato-index');
+    Route::post('/detalhes', 'ExtratoController@detalhes')->name('extrato-detalhes');
+});
