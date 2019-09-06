@@ -96,3 +96,5 @@ class GraficoController extends Controller
         return view('Grafico.index', compact('categories','receitas','despesas','total_despesas','total_receitas'));
     }
 }
+// TODO o grafico mostra todas as contas e não as contas por categoria
+// TODO o grafico não esta conseguindo renderizar valores com casa decimanl

@@ -44,7 +44,7 @@
             data.addColumn('number','Valor');
             data.addRows([
                 @foreach($categories as $category)
-                    ['{{ $category->name }}', {{ number_format($category->valor,2,'.','.') }} ],
+                    ['{{ $category->name }}', {{ number_format($category->valor,2,',','.') }} ],
                 @endforeach
             ]);
             var options = {
@@ -57,3 +57,4 @@
 
     </script>
 @endsection
+

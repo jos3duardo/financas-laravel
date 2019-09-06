@@ -12,9 +12,9 @@
 </div>
 <div class="form-group">
     <label for="valor" class="control-label">Categoria</label>
-    <select name="category_id" id=""  class="form-control">
+    <select name="category_id" id="" required  class="form-control">
         @if(count($categories)>0)
-            <option value="0">Categoria</option>
+            <option>Categoria</option>
         @endif
         @foreach($categories as $category)
             @if(isset($despesa))
