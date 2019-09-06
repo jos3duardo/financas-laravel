@@ -47,7 +47,6 @@ class GraficoController extends Controller
             ->groupBy('valor')
             ->groupBy('categories.name')
             ->get();
-
         return view('Grafico.index', compact('categories','receitas','despesas','total_despesas','total_receitas'));
     }
 
@@ -92,6 +91,7 @@ class GraficoController extends Controller
             ->groupBy('valor')
             ->groupBy('categories.name')
             ->get();
+
 
         return view('Grafico.index', compact('categories','receitas','despesas','total_despesas','total_receitas'));
     }
