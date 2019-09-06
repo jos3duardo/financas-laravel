@@ -33,14 +33,14 @@
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-
-                    <a href="{{route('home')}}" class="btn btn-primary btn-sm ml-2  mt-2 nav-link ">Home</a>
-                    <a href="{{route('category-index')}}" class="btn btn-dark btn-sm ml-2  mt-2 nav-link ">Centros de Custos</a>
-                    <a href="{{route('receita-index')}}" class="btn btn-dark btn-sm ml-2  mt-2 nav-link ">Receitas</a>
-                    <a href="{{route('despesa-index')}}" class="btn btn-dark btn-sm ml-2  mt-2 nav-link ">Despesas</a>
-                    <a href="{{route('grafico-index')}}" class="btn btn-dark btn-sm ml-2  mt-2 nav-link ">Gráfico</a>
-                    <a href="{{route('extrato-index')}}" class="btn btn-dark btn-sm ml-2  mt-2 nav-link">Extrato</a>
-
+                    @if(Auth::user())
+                        <a href="{{route('home')}}" class="btn btn-primary btn-sm ml-2  mt-2 nav-link ">Home</a>
+                        <a href="{{route('category-index')}}" class="btn btn-dark btn-sm ml-2  mt-2 nav-link ">Centros de Custos</a>
+                        <a href="{{route('receita-index')}}" class="btn btn-dark btn-sm ml-2  mt-2 nav-link ">Receitas</a>
+                        <a href="{{route('despesa-index')}}" class="btn btn-dark btn-sm ml-2  mt-2 nav-link ">Despesas</a>
+                        <a href="{{route('grafico-index')}}" class="btn btn-dark btn-sm ml-2  mt-2 nav-link ">Gráfico</a>
+                        <a href="{{route('extrato-index')}}" class="btn btn-dark btn-sm ml-2  mt-2 nav-link">Extrato</a>
+                    @endif
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
 
