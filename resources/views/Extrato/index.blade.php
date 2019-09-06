@@ -1,17 +1,11 @@
 @extends('layouts.app')
 @section('content')
     <div class="container">
-        <a href="{{route('home')}}" class="btn btn-primary col-sm-auto mb-2 ">Home</a>
-        <a href="{{route('category-index')}}" class="btn btn-dark col-sm-auto mb-2 ">Centros de Custos</a>
-        <a href="{{route('receita-index')}}" class="btn btn-dark col-sm-auto mb-2 ">Receitas</a>
-        <a href="{{route('despesa-index')}}" class="btn btn-dark col-sm-auto mb-2 ">Despesas</a>
-        <a href="{{route('grafico-index')}}" class="btn btn-dark col-sm-auto mb-2 ">Grafico</a>
-        <hr>
-        <h3>Extrato</h3>
-        <div class="container-fluid">
+        <h3 class="text-center">Extrato por periodo</h3>
+        <br><br>
         <form action="{{route('extrato-detalhes')}}" method="post">
             @csrf
-            <div class="form-row">
+            <div class="row justify-content-center">
                 <div class="col-4 col-sm-auto">
                     <label for="inicio">Inicio</label>
                     <input type="text" id="inicio" name="inicio" class="form-control" value="{{date('d/m/Y', strtotime('-1 month'))}}">
@@ -25,67 +19,79 @@
                 </div>
             </div>
         </form>
+
+        <br><br>
+        <h5 class="text-center" >Resumo</h5>
+        <div class="row justify-content-center">
+            <table class="table table-bordered table-sm col-7 ">
+                <thead>
+                    <tr class="text-center">
+                        <th colspan="2">Total de Receitas</th>
+                        <th colspan="2">Total de Despesas</th>
+                        <th colspan="2">Total Geral</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td style="border-right: none !important; " width="5%">R$</td>
+                    <td style="border-left: none !important;" class="text-right ">{{ number_format($total_receitas,2,'.','.') }}</td>
+                    <td style="border-right: none !important; " width="5%">R$</td>
+                    <td style="border-left: none !important;" class="text-right ">{{ number_format($total_despesas,2,'.','.') }}</td>
+
+                    @if(($total_receitas - $total_despesas)>0)
+                        <td style="border-right: none !important;" class="text-primary" width="5%">R$</td>
+                        <td style="border-left: none !important;" class="text-right text-primary ">{{ number_format($total_receitas - $total_despesas,2,'.','.') }}</td>
+                    @else
+                        <td style="border-right: none !important;" class="text-danger" width="5%">R$</td>
+                        <td style="border-left: none !important;" class="text-right text-danger">{{ number_format($total_receitas - $total_despesas,2,'.','.') }}</td>
+                    @endif
+                </tr>
+                </tbody>
+            </table>
         </div>
-        <hr>
-
-        <table class="table table-bordered table-sm col-3 col-sm-6">
-            <tr>
-                <td colspan="2" class="text-center active" >Resumo</td>
-            </tr>
-            <tr>
-                <th class="">Receitas</th>
-                <td class="text-right "> R$ {{ number_format($total_receitas,2,'.','.') }}</td>
-            </tr>
-            <tr>
-                <th class="">Despesas</th>
-                <td class="text-right "> R$ {{ number_format($total_despesas,2,'.','.') }}</td>
-            </tr>
-            <tr>
-                <th class="">Total</th>
-                <td class="text-right "> R$ {{ number_format($total_receitas - $total_despesas,2,'.','.') }}</td>
-            </tr>
-        </table>
-
+        <br><br>
         <div class="row">
             <div class="col-md-6">
-                <h5>Despesas</h5>
-                <table class="table table-sm">
+                <h5 class="text-center text-danger">Despesas</h5>
+                <table class="table table-sm table-bordered table-striped">
                     <thead>
-                    <tr>
-                        <th>Data</th>
+                    <tr class="active">
+                        <th width="10%">Data</th>
                         <th>Descrição</th>
                         <th>Categoria</th>
-                        <th>Valor</th>
+                        <th class="text-right" colspan="2">Valor</th>
                     </tr>
                     </thead>
                     <tbody>
                     @foreach($despesas as $despesa)
                         <tr>
-                            <td>{{$despesa->data_lancamento}}</td>
+                            <td>{{$despesa->data_lancamento->format('d/m/Y')}}</td>
                             <td>{{$despesa->name}}</td>
                             <td>{{$despesa->category_name}}</td>
-                            <td>R$ - {{ number_format($despesa->valor,2,'.','.') }}</td>
+                            <td style="border-right: none !important; " width="5%">R$</td>
+                            <td style="border-left: none !important;" width="20%" class="text-right" > {{ number_format($despesa->valor,2,',','.') }}</td>
                         </tr>
                     @endforeach
                     </tbody>
                 </table>
             </div>
             <div class="col-md-6">
-                <h5>Receitas</h5>
-                <table class="table table-sm">
+                <h5 class="text-center text-success">Receitas</h5>
+                <table class="table table-sm table-bordered table-striped">
                     <thead>
                     <tr>
-                        <th>Data</th>
+                        <th width="10%">Data</th>
                         <th>Descrição</th>
-                        <th>Valor</th>
+                        <th class="text-right" colspan="2">Valor</th>
                     </tr>
                     </thead>
                     <tbody>
                     @foreach($receitas as $receita)
                         <tr>
-                            <td>{{$receita->data_lancamento}}</td>
+                            <td>{{$receita->data_lancamento->format('d/m/Y')}}</td>
                             <td>{{$receita->name}}</td>
-                            <td>R$ + {{ number_format($receita->valor,2,'.','.') }}</td>
+                            <td style="border-right: none !important; " width="5%">R$</td>
+                            <td style="border-left: none !important;" width="20%" class="text-right" >R$ {{ number_format($receita->valor,2,',','.') }}</td>
                         </tr>
                     @endforeach
                     </tbody>

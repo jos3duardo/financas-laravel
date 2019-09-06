@@ -1,7 +1,6 @@
 @extends('layouts.app')
 @section('content')
     <div class="container">
-        <a href="{{route('despesa-index')}}" class="btn btn-primary">Volta</a>
         <a href="{{route('despesa-edit', ['id' => $despesa->id])}}" class="btn btn-dark">Editar</a>
         <a href="{{route('despesa-delete', ['id' => $despesa->id])}}" class="btn btn-danger">Deletar</a>
         <hr>
@@ -10,7 +9,7 @@
         <table class="table table-sm table-bordered">
             <tbody>
             <tr>
-                <th>#</th>
+                <th>Id</th>
                 <td>{{$despesa->id}}</td>
             </tr>
             <tr>

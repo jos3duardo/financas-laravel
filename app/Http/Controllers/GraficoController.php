@@ -49,7 +49,6 @@ class GraficoController extends Controller
             ->groupBy('categories.name')
             ->get();
 
-        dump($categories);
         return view('Grafico.index', compact('categories','receitas','despesas','total_despesas','total_receitas'));
     }
 

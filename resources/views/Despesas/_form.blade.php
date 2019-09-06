@@ -1,6 +1,6 @@
 <div class="form-group">
     <label for="data_lancamento" class="control-label">Data Lancamento</label>
-    <input type="text" id="data_lancamento" class="form-control" placeholder="00/00/0000" name="data_lancamento" value="{{$despesa->data_lancamento ?? date('d/m/Y')}}" required>
+    <input type="text" id="data_lancamento" class="form-control" placeholder="00/00/0000" name="data_lancamento" value="{{$despesa->data_lancamento->format('d/m/Y') ?? date('d/m/Y')}}" required>
 </div>
 <div class="form-group">
     <label for="name" class="control-label">Nome</label>

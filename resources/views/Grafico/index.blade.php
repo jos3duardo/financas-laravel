@@ -1,31 +1,26 @@
 @extends('layouts.app')
 @section('content')
-    <div class="container">
-        <a href="{{route('home')}}" class="btn btn-primary">Home</a>
-        <a href="{{route('category-index')}}" class="btn btn-dark">Centros de Custos</a>
-        <a href="{{route('receita-index')}}" class="btn btn-dark">Receitas</a>
-        <a href="{{route('despesa-index')}}" class="btn btn-dark">Despesas</a>
-        <a href="{{route('extrato-index')}}" class="btn btn-dark">Extrato</a>
-        <hr>
-        <h3>Grafico</h3>
-        <div class="row">
-            <div class="center">
-                <form class="form-inline text-center" action="{{route('grafico-grafico')}}" method="post">
-                @csrf
-                    <div class="form-group">
-                        <label for="inicio" class="col-form-label">Inicio</label>
+    <div class="row justify-content-center">
+            <form class="form-inline text-center" action="{{route('grafico-grafico')}}" method="post">
+            @csrf
+                <div class="row justify-content-center">
+                    <div class="col-4 col-sm-auto">
+                        <label for="inicio">Inicio</label>
                         <input type="text" id="inicio" name="inicio" class="form-control" value="{{date('d/m/Y', strtotime('-1 month'))}}">
                     </div>
-                    <div class="form-group">
-                        <label for="fim" class="col-form-label">Fim</label>
+                    <div class="col-4 col-sm-auto">
+                        <label for="fim">Fim</label>
                         <input type="text" id="fim" name="fim" class="form-control" value="{{date('d/m/Y')}}">
                     </div>
-                <button type="submit" class="btn btn-dark">Pesquisa</button>
-                </form>
-            </div>
-            </div>
-        <hr>
-
+                    <div class="col-auto col-sm-auto">
+                        <button type="submit" class="btn btn-dark mt-4" style="margin-top: 1.5rem!important">Pesquisa</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    <br><br>
+    <div class="container">
+        <h3 class="text-center">Grafico</h3>
         <div id="chart-div" style="width: 100%; height: 500px;"></div>
     </div>
 @endsection

@@ -1,12 +1,10 @@
 @extends('layouts.app')
 @section('content')
     <div class="container">
-        <a href="{{route('home')}}" class="btn btn-dark">Volta</a>
-        <a href="{{route('despesa-create')}}" class="btn btn-primary">Nova</a>
-        <hr>
-
+        <a href="{{route('despesa-create')}}" class="btn btn-success">Criar</a>
+        <br><br>
         <h3>Relação de Despesa</h3>
-        <table class="table table-bordered table-sm">
+        <table class="table table-bordered table-sm table-responsive-sm">
             <tbody>
             <tr>
                 <th style="width: 15px">#</th>
