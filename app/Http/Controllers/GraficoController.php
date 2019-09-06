@@ -39,14 +39,17 @@ class GraficoController extends Controller
 
         $categories =  DB::table('categories')
             ->selectRaw('categories.name, sum(valor) as valor')
+            ->whereBetween('despesas.data_lancamento',[$inicio,$fim])
             ->leftJoin('despesas','despesas.category_id','=','categories.id')
             ->whereNull('despesas.deleted_at')
             ->where('categories.user_id','=',$user->id)
             ->whereNotNull('despesas.category_id')
-            ->whereBetween('despesas.data_lancamento',[$inicio,$fim])
+
             ->groupBy('valor')
             ->groupBy('categories.name')
             ->get();
+
+        dump($categories);
         return view('Grafico.index', compact('categories','receitas','despesas','total_despesas','total_receitas'));
     }
 
@@ -97,4 +100,4 @@ class GraficoController extends Controller
     }
 }
 // TODO o grafico mostra todas as contas e não as contas por categoria
-// TODO o grafico não esta conseguindo renderizar valores com casa decimanl
+// TODO verificar categorias repetidas no grafico
