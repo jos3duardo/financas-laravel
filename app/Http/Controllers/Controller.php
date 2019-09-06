@@ -10,7 +10,10 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
-
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Recebe um data no formato de String e converte no padrão de date para salvar no DB
      * @author Jos3duardo

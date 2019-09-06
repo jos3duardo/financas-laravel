@@ -50,3 +50,7 @@ Route::prefix('extrato')->group(function () {
     Route::get('/', 'ExtratoController@index')->name('extrato-index');
     Route::post('/detalhes', 'ExtratoController@detalhes')->name('extrato-detalhes');
 });
+Route::prefix('grafico')->group(function () {
+    Route::get('/', 'GraficoController@index')->name('grafico-index');
+    Route::post('/grafico', 'GraficoController@grafico')->name('grafico-grafico');
+});
