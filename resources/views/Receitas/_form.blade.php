@@ -8,5 +8,5 @@
 </div>
 <div class="form-group">
     <label for="valor" class="control-label">Valor</label>
-    <input type="number" id="valorvalor" class="form-control" name="valor" placeholder="0000,00" value="{{$receita->valor?? ''}}" required step="any">
+    <input type="number" id="valorvalor" class="form-control" name="valor" placeholder="0000,00" value="{{$receita->valor ?? ''}}" required step="any">
 </div>

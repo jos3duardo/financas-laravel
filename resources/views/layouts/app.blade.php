@@ -38,7 +38,7 @@
                     <a href="{{route('category-index')}}" class="btn btn-dark btn-sm ml-2  mt-2 nav-link ">Centros de Custos</a>
                     <a href="{{route('receita-index')}}" class="btn btn-dark btn-sm ml-2  mt-2 nav-link ">Receitas</a>
                     <a href="{{route('despesa-index')}}" class="btn btn-dark btn-sm ml-2  mt-2 nav-link ">Despesas</a>
-                    <a href="{{route('grafico-index')}}" class="btn btn-dark btn-sm ml-2  mt-2 nav-link ">Grafico</a>
+                    <a href="{{route('grafico-index')}}" class="btn btn-dark btn-sm ml-2  mt-2 nav-link ">Gráfico</a>
                     <a href="{{route('extrato-index')}}" class="btn btn-dark btn-sm ml-2  mt-2 nav-link">Extrato</a>
 
                     <!-- Left Side Of Navbar -->

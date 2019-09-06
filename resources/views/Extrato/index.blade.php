@@ -56,7 +56,7 @@
                 <table class="table table-sm table-bordered table-striped">
                     <thead>
                     <tr class="active">
-                        <th width="10%">Data</th>
+                        <th class="text-center" width="10%">Data</th>
                         <th>Descrição</th>
                         <th>Categoria</th>
                         <th class="text-right" colspan="2">Valor</th>
@@ -65,7 +65,7 @@
                     <tbody>
                     @foreach($despesas as $despesa)
                         <tr>
-                            <td>{{$despesa->data_lancamento->format('d/m/Y')}}</td>
+                            <td class="text-center">{{$despesa->data_lancamento->format('d/m/Y')}}</td>
                             <td>{{$despesa->name}}</td>
                             <td>{{$despesa->category_name}}</td>
                             <td style="border-right: none !important; " width="5%">R$</td>
@@ -73,6 +73,13 @@
                         </tr>
                     @endforeach
                     </tbody>
+                    <tfooter>
+                        <tr>
+                            <th colspan="3" class="text-right">Total</th>
+                            <td style="border-right: none !important; " width="5%">R$</td>
+                            <td style="border-left: none !important;" width="20%" class="text-right" > {{ number_format($total_despesas,2,'.','.') }}</td>
+                        </tr>
+                    </tfooter>
                 </table>
             </div>
             <div class="col-md-6">
@@ -80,7 +87,7 @@
                 <table class="table table-sm table-bordered table-striped">
                     <thead>
                     <tr>
-                        <th width="10%">Data</th>
+                        <th class="text-center" width="10%">Data</th>
                         <th>Descrição</th>
                         <th class="text-right" colspan="2">Valor</th>
                     </tr>
@@ -88,13 +95,20 @@
                     <tbody>
                     @foreach($receitas as $receita)
                         <tr>
-                            <td>{{$receita->data_lancamento->format('d/m/Y')}}</td>
+                            <td class="text-center">{{$receita->data_lancamento->format('d/m/Y')}}</td>
                             <td>{{$receita->name}}</td>
                             <td style="border-right: none !important; " width="5%">R$</td>
                             <td style="border-left: none !important;" width="20%" class="text-right" >R$ {{ number_format($receita->valor,2,',','.') }}</td>
                         </tr>
                     @endforeach
                     </tbody>
+                    <tfooter>
+                        <tr>
+                            <th colspan="2" class="text-right">Total</th>
+                            <td style="border-right: none !important; " width="5%">R$</td>
+                            <td style="border-left: none !important;" width="20%" class="text-right" > {{ number_format($total_receitas - $total_despesas,2,'.','.') }}</td>
+                        </tr>
+                    </tfooter>
                 </table>
             </div>
         </div>
