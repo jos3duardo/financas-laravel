@@ -37,15 +37,13 @@ class GraficoController extends Controller
         $total_despesas = $despesas->sum('valor');
         $total_receitas = $receitas->sum('valor');
 
-        $categories =  DB::table('categories')
+        $categories  =  DB::table('categories')
             ->selectRaw('categories.name, sum(valor) as valor')
             ->whereBetween('despesas.data_lancamento',[$inicio,$fim])
             ->leftJoin('despesas','despesas.category_id','=','categories.id')
             ->whereNull('despesas.deleted_at')
             ->where('categories.user_id','=',$user->id)
             ->whereNotNull('despesas.category_id')
-
-            ->groupBy('valor')
             ->groupBy('categories.name')
             ->get();
 
@@ -94,7 +92,7 @@ class GraficoController extends Controller
             ->groupBy('categories.name')
             ->get();
 
-
+dd($categories);
         return view('Grafico.index', compact('categories','receitas','despesas','total_despesas','total_receitas'));
     }
 }
